@@ -771,6 +771,7 @@ class HospitalECardApp {
 
         const patientName = document.getElementById("book-patient-name").value;
         const patientPhone = document.getElementById("book-patient-phone").value;
+        const patientEmail = document.getElementById("book-patient-email").value;
         const dateVal = document.getElementById("book-date").value;
         const timeSlot = document.getElementById("book-time").value;
 
@@ -784,10 +785,12 @@ class HospitalECardApp {
         // Update receipt markup
         document.getElementById("receipt-number").innerText = "#" + randomReceiptId;
         document.getElementById("receipt-patient-name").innerText = patientName;
+        document.getElementById("receipt-patient-phone-row").innerText = patientPhone;
+        document.getElementById("receipt-patient-email").innerText = patientEmail;
+        document.getElementById("receipt-patient-email-note").innerText = patientEmail;
         document.getElementById("receipt-doctor-name").innerText = doc.name;
         document.getElementById("receipt-doctor-dept").innerText = doc.department;
         document.getElementById("receipt-datetime").innerText = `${formattedDate} @ ${timeSlot}`;
-        document.getElementById("receipt-patient-phone").innerText = patientPhone;
 
         // Reset Booking Form
         document.getElementById("booking-form").reset();
@@ -795,8 +798,11 @@ class HospitalECardApp {
         // Trigger Confetti Effect
         this.triggerConfetti();
 
-        // Send AWS SNS Notification to Doctor
+        // Send AWS SNS Notification to Doctor (Toast Simulation)
         this.sendSNSNotification(doc, patientName, patientPhone, formattedDate, timeSlot, randomReceiptId);
+
+        // Send Real Email Notification
+        this.sendRealEmailNotification(doc, patientName, patientPhone, patientEmail, formattedDate, timeSlot, randomReceiptId);
 
         // Switch Modals
         this.closeModal("modal-booking");
@@ -1170,6 +1176,7 @@ class HospitalECardApp {
 
         const patientName = document.getElementById("home-book-patient-name").value;
         const patientPhone = document.getElementById("home-book-patient-phone").value;
+        const patientEmail = document.getElementById("home-book-patient-email").value;
         const dateVal = document.getElementById("home-book-date").value;
         const timeSlot = "09:30 AM"; // Default morning slot
 
@@ -1183,10 +1190,12 @@ class HospitalECardApp {
         // Update receipt markup
         document.getElementById("receipt-number").innerText = "#" + randomReceiptId;
         document.getElementById("receipt-patient-name").innerText = patientName;
+        document.getElementById("receipt-patient-phone-row").innerText = patientPhone;
+        document.getElementById("receipt-patient-email").innerText = patientEmail;
+        document.getElementById("receipt-patient-email-note").innerText = patientEmail;
         document.getElementById("receipt-doctor-name").innerText = doc.name;
         document.getElementById("receipt-doctor-dept").innerText = doc.department;
         document.getElementById("receipt-datetime").innerText = `${formattedDate} @ ${timeSlot}`;
-        document.getElementById("receipt-patient-phone").innerText = patientPhone;
 
         // Reset Homepage Booking Form
         document.getElementById("home-booking-form").reset();
@@ -1199,8 +1208,11 @@ class HospitalECardApp {
         // Trigger Confetti Effect
         this.triggerConfetti();
 
-        // Send AWS SNS Notification to Doctor
+        // Send AWS SNS Notification to Doctor (Toast Simulation)
         this.sendSNSNotification(doc, patientName, patientPhone, formattedDate, timeSlot, randomReceiptId);
+
+        // Send Real Email Notification
+        this.sendRealEmailNotification(doc, patientName, patientPhone, patientEmail, formattedDate, timeSlot, randomReceiptId);
 
         // Open Receipt Modal
         this.openModal("modal-receipt");
@@ -1288,6 +1300,56 @@ Date/Time: ${date} @ ${timeSlot}</div>
                 if (toast.parentElement) toast.remove();
             }, 400);
         }, 6000);
+    }
+
+    sendRealEmailNotification(doctor, patientName, patientPhone, patientEmail, date, timeSlot, receiptId) {
+        // Fallback to primary hospital email if doctor does not have one
+        const doctorEmail = doctor.email || 'drmansingpatil@gmail.com';
+        
+        // FormSubmit AJAX submission endpoint
+        const formSubmitUrl = `https://formsubmit.co/ajax/${doctorEmail}`;
+        
+        // Construct the body payload
+        const emailBody = {
+            "Patient Name": patientName,
+            "Patient Contact": patientPhone,
+            "Patient Email": patientEmail,
+            "Appointment Date": date,
+            "Time Slot": timeSlot,
+            "Receipt Reference": `#${receiptId}`,
+            "_subject": `New Appointment Booked: ${patientName} - #${receiptId}`,
+            "_replyto": patientEmail,
+            "_honey": "", // honeypot spam protection
+            "_autoresponse": `Dear ${patientName},\n\n` +
+                             `This is a confirmation of your appointment request at Shri Swami Samarth Hospital.\n\n` +
+                             `Appointment Details:\n` +
+                             `- Specialist: ${doctor.name} (${doctor.specialty})\n` +
+                             `- Date: ${date}\n` +
+                             `- Time Slot: ${timeSlot}\n` +
+                             `- Receipt Reference: #${receiptId}\n\n` +
+                             `If you need to reschedule or cancel, please contact the clinic.\n\n` +
+                             `Best regards,\n` +
+                             `Shri Swami Samarth Hospital Team\n` +
+                             `Tel: 9922231315 / 9021751057`
+        };
+
+        console.log(`Sending real email request via FormSubmit to doctor's email: ${doctorEmail}...`);
+
+        fetch(formSubmitUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(emailBody)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("FormSubmit email sent successfully:", data);
+        })
+        .catch(err => {
+            console.error("FormSubmit email submission error:", err);
+        });
     }
 
     setTestimonial(index) {
