@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shri Swami Samarth Hospital</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Glow Effects -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+
+    <!-- App Container -->
+    <div class="app-container">
+
+        <!-- Header / Navigation Bar -->
+        <header class="app-header">
+            <div class="header-logo" onclick="app.navigateTo('directory')">
+                <div class="logo-icon">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="hospital-name">Shri Swami Samarth Hospital</span>
+                    <span class="hospital-tag">Hospital & Ayurvedic Center</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="clock-widget" id="header-clock-widget">
+                    <i class="bi bi-clock-fill"></i> <span id="header-clock">--:--:-- --</span>
+                </div>
+                <button class="nav-btn active" id="btn-nav-directory" onclick="app.navigateTo('directory')">
+                    <i class="bi bi-grid-fill"></i> <span>Directory</span>
+                </button>
+                <button class="nav-btn" id="btn-nav-admin" onclick="app.navigateTo('admin')">
+                    <i class="bi bi-sliders"></i> <span>Manage</span>
+                </button>
+                <button class="theme-toggle-btn" id="theme-toggle" onclick="app.toggleTheme()"
+                    aria-label="Toggle Theme">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="app-content">
+
+            <!-- 1. HOSPITAL DIRECTORY VIEW (HOMEPAGE) -->
+            <section id="view-directory" class="content-view active-view">
+                <!-- Hero Section -->
+                <div class="homepage-hero fade-in">
+                    <div class="hero-overlay-bg"></div>
+                    <div class="hero-content-wrapper">
+                        <span class="hero-badge"><i class="bi bi-patch-check-fill"></i> Trusted Healthcare Since
+                            2009</span>
+                        <h1 class="hero-title">Shri Swami Samarth Hospital</h1>
+                        <p class="hero-subtitle">Ayurveda • Homeopathy • General Medicine</p>
+                        <p class="hero-desc">Providing compassionate, state-of-the-art medical treatments. Combine
+                            traditional healing with advanced clinical diagnostics to restore your health.</p>
+
+                        <div class="hero-action-buttons">
+                            <button onclick="app.scrollToSection('sec-home-appointment')" class="hero-btn-primary">
+                                <i class="bi bi-calendar-check-fill"></i> Book Appointment
+                            </button>
+                            <a href="tel:9922231315" class="hero-btn-secondary">
+                                <i class="bi bi-telephone-fill"></i> Call Now
+                            </a>
+                            <a href="https://wa.me/9922231315" class="hero-btn-whatsapp" target="_blank">
+                                <i class="bi bi-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Section -->
+                <div class="trust-cards-grid slide-up">
+                    <div class="trust-card">
+                        <div class="trust-card-icon"><i class="bi bi-award-fill"></i></div>
+                        <div class="trust-card-info">
+                            <h3>15+ Years</h3>
+                            <p>Experience</p>
+                        </div>
+                    </div>
+                    <div class="trust-card">
+                        <div class="trust-card-icon"><i class="bi bi-people-fill"></i></div>
+                        <div class="trust-card-info">
+                            <h3>10,000+</h3>
+                            <p>Patients Treated</p>
+                        </div>
+                    </div>
+                    <div class="trust-card">
+                        <div class="trust-card-icon"><i class="bi bi-clock-fill"></i></div>
+                        <div class="trust-card-info">
+                            <h3>24/7 Support</h3>
+                            <p>Emergency Services</p>
+                        </div>
+                    </div>
+                    <div class="trust-card">
+                        <div class="trust-card-icon"><i class="bi bi-heart-fill"></i></div>
+                        <div class="trust-card-info">
+                            <h3>Trusted by</h3>
+                            <p>Families</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Section -->
+                <section class="services-section slide-up">
+                    <div class="section-title-wrapper text-center">
+                        <h2>Our Premium Healthcare Services</h2>
+                        <div class="title-bar"></div>
+                        <p>Comprehensive medical care tailored to your wellness needs</p>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-stethoscope"></i></div>
+                            <h3>🩺 General Medicine</h3>
+                            <p>Expert primary care, general health checks, and chronic disease management.</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-flower1"></i></div>
+                            <h3>🌿 Ayurvedic Treatment</h3>
+                            <p>Traditional Ayurvedic healing, consulting, and natural remedies.</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-heart-pulse"></i></div>
+                            <h3>🏥 Homeopathy</h3>
+                            <p>Gentle and effective homeopathic solutions for chronic and acute issues.</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-capsule"></i></div>
+                            <h3>💊 Pharmacy</h3>
+                            <p>Well-stocked pharmacy providing quality medicines and supplements.</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-prescription2"></i></div>
+                            <h3>🧪 Laboratory</h3>
+                            <p>State-of-the-art diagnostic testing, blood tests, and pathology reports.</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-telephone-inbound"></i></div>
+                            <h3>🚑 Emergency Care</h3>
+                            <p>24/7 fast action emergency helpline and clinic consultations.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Doctors Directory Section -->
+                <section class="doctors-directory-section slide-up" id="sec-doctors-directory">
+                    <div class="section-title-wrapper text-center">
+                        <h2>Meet Our Medical Specialists</h2>
+                        <div class="title-bar"></div>
+                        <p>Search and connect with our world-class doctors instantly</p>
+                    </div>
+
+                    <!-- Directory Filtering -->
+                    <div class="directory-filter-section">
+                        <div class="search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="text" id="search-input"
+                                placeholder="Search doctor by name, specialty, or department..."
+                                oninput="app.filterDoctors()">
+                        </div>
+                        <div class="filter-pills-container">
+                            <button class="filter-pill active" data-dept="All" onclick="app.filterDepartment('All')">All
+                                Specialists</button>
+                            <button class="filter-pill" data-dept="General Medicine"
+                                onclick="app.filterDepartment('General Medicine')">General Medicine</button>
+                            <button class="filter-pill" data-dept="Ayurveda"
+                                onclick="app.filterDepartment('Ayurveda')">Ayurveda</button>
+                            <button class="filter-pill" data-dept="Homeopathy"
+                                onclick="app.filterDepartment('Homeopathy')">Homeopathy</button>
+                        </div>
+                    </div>
+
+                    <!-- Doctors List / Grid -->
+                    <div class="doctors-grid-container">
+                        <div class="section-header-title">
+                            <h3>Specialists & Clinicians</h3>
+                            <span id="results-count">Showing 0 specialists</span>
+                        </div>
+                        <div id="doctors-list" class="doctors-grid">
+                            <!-- Dynamic Doctor Cards Inserted Here -->
+                        </div>
+                    </div>
+
+                    <!-- Support & Administrative Staff Section -->
+                    <div class="staff-grid-container" style="margin-top: 48px;">
+                        <div class="section-header-title">
+                            <h3>Support & Administrative Staff</h3>
+                            <span id="staff-results-count">Showing 0 staff members</span>
+                        </div>
+                        <div id="staff-list" class="staff-grid">
+                            <!-- Dynamic Staff Cards Inserted Here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Why Choose Us Section -->
+                <section class="why-choose-us-section slide-up">
+                    <div class="why-choose-grid">
+                        <div class="why-choose-left">
+                            <div class="why-choose-image-container">
+                                <img src="bg.jpeg" alt="Hospital Building" class="choose-us-img">
+                                <div class="experience-badge-floating">
+                                    <h3>15+</h3>
+                                    <span>Years of Trust</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="why-choose-right">
+                            <div class="section-title-wrapper">
+                                <h2>Why Choose Us</h2>
+                                <div class="title-bar"></div>
+                            </div>
+                            <p>Shri Swami Samarth Hospital Beedshed combines modern diagnostic methodologies with
+                                time-tested healthcare paradigms to offer holistic healing.</p>
+                            <ul class="why-choose-list">
+                                <li>
+                                    <div class="icon-bullet"><i class="bi bi-shield-check"></i></div>
+                                    <div>
+                                        <strong>Experienced Doctors</strong>
+                                        <p>Our practitioners have over 20 years of clinical experience in treating
+                                            chronic diseases.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-bullet"><i class="bi bi-wallet2"></i></div>
+                                    <div>
+                                        <strong>Affordable Treatment</strong>
+                                        <p>Quality healthcare should be accessible. We offer transparent pricing with
+                                            zero hidden costs.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-bullet"><i class="bi bi-hospital"></i></div>
+                                    <div>
+                                        <strong>Modern Facilities</strong>
+                                        <p>Equipped with advanced diagnostic labs, well-stocked pharmacy, and clean OPD
+                                            setups.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-bullet"><i class="bi bi-heart-fill"></i></div>
+                                    <div>
+                                        <strong>Personal Care</strong>
+                                        <p>Every patient receives individualized attention and customized medical
+                                            therapy plans.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-bullet"><i class="bi bi-calendar-check"></i></div>
+                                    <div>
+                                        <strong>Trusted Since 2009</strong>
+                                        <p>A history of over a decade of providing compassionate healthcare to Kolhapur
+                                            region.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testimonials Section -->
+                <section class="testimonials-section slide-up">
+                    <div class="section-title-wrapper text-center">
+                        <h2>What Our Patients Say</h2>
+                        <div class="title-bar"></div>
+                        <p>Genuine testimonials from families who experienced our care</p>
+                    </div>
+                    <div class="testimonials-carousel-wrapper">
+                        <div class="testimonials-carousel" id="testimonials-slider">
+                            <div class="testimonial-slide active">
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-text">"Best treatment and caring staff. Dr. Mansing Patil
+                                    explained the Ayurvedic treatment in detail and it cured my chronic pain. Very
+                                    grateful!"</p>
+                                <h4 class="testimonial-author">- Ranjit R. Patil</h4>
+                            </div>
+                            <div class="testimonial-slide">
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-text">"The doctors here are very experienced and the treatment
+                                    costs are very reasonable. The staff at the front desk was very polite and helpful."
+                                </p>
+                                <h4 class="testimonial-author">- Swati Salunkhe</h4>
+                            </div>
+                            <div class="testimonial-slide">
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-text">"Clean clinic, state-of-the-art laboratory testing, and very
+                                    fast pharmacy service. Strongly recommended for general medicine and homeopathy."
+                                </p>
+                                <h4 class="testimonial-author">- Ashish K.</h4>
+                            </div>
+                        </div>
+                        <div class="carousel-dots" id="carousel-dots-container">
+                            <span class="carousel-dot active" onclick="app.setTestimonial(0)"></span>
+                            <span class="carousel-dot" onclick="app.setTestimonial(1)"></span>
+                            <span class="carousel-dot" onclick="app.setTestimonial(2)"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gallery Section -->
+                <section class="gallery-section slide-up">
+                    <div class="section-title-wrapper text-center">
+                        <h2>Our Hospital Gallery</h2>
+                        <div class="title-bar"></div>
+                        <p>Visual tour of our state-of-the-art premises and services</p>
+                    </div>
+                    <div class="gallery-masonry">
+                        <div class="gallery-item">
+                            <img src="bg.jpeg" alt="Hospital Building">
+                            <div class="gallery-overlay"><span>Hospital Building</span></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="reception.png" alt="Reception Desk">
+                            <div class="gallery-overlay"><span>Reception Area</span></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="consultation.png" alt="Consultation Room">
+                            <div class="gallery-overlay"><span>Consultation Office</span></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="pharmacy.png" alt="Pharmacy">
+                            <div class="gallery-overlay"><span>In-House Pharmacy</span></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="laboratory.png" alt="Laboratory">
+                            <div class="gallery-overlay"><span>Diagnostic Laboratory</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Appointment Form Section -->
+                <section class="homepage-appointment-section slide-up" id="sec-home-appointment">
+                    <div class="appointment-card-full">
+                        <div class="appointment-info-col">
+                            <h2>Book An Appointment</h2>
+                            <p>Fill out the form to request a physical consultation at our hospital. We will contact you
+                                immediately via phone/SMS to confirm your slot.</p>
+                            <div class="appointment-perks">
+                                <div class="perk-item"><i class="bi bi-clock"></i> <span>Quick response within 15
+                                        minutes</span></div>
+                                <div class="perk-item"><i class="bi bi-calendar-check"></i> <span>Select your preferred
+                                        doctor instantly</span></div>
+                                <div class="perk-item"><i class="bi bi-shield-check"></i> <span>Secure and confidential
+                                        booking</span></div>
+                            </div>
+                        </div>
+                        <div class="appointment-form-col">
+                            <form id="home-booking-form" onsubmit="app.confirmHomepageBooking(event)">
+                                <div class="form-group-home">
+                                    <label for="home-book-patient-name">Patient Name <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="home-book-patient-name" required placeholder="e.g. John Doe">
+                                </div>
+                                <div class="form-group-home">
+                                    <label for="home-book-patient-phone">Phone Number <span
+                                            class="required">*</span></label>
+                                    <input type="tel" id="home-book-patient-phone" required
+                                        placeholder="e.g. 9876543210">
+                                </div>
+                                <div class="form-grid-2-home">
+                                    <div class="form-group-home">
+                                        <label for="home-book-doctor">Select Doctor / Specialist <span
+                                                class="required">*</span></label>
+                                        <select id="home-book-doctor" required>
+                                            <!-- Dynamically populated from JS -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group-home">
+                                        <label for="home-book-date">Appointment Date <span
+                                                class="required">*</span></label>
+                                        <input type="date" id="home-book-date" required>
+                                    </div>
+                                </div>
+                                <div class="form-group-home">
+                                    <label for="home-book-message">Symptoms / Medical Notes</label>
+                                    <textarea id="home-book-message" rows="3"
+                                        placeholder="Describe symptoms or reasons for visit..."></textarea>
+                                </div>
+                                <button type="submit" class="book-appointment-submit-btn">
+                                    <i class="bi bi-calendar-event"></i> Book Appointment Now
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Map & Contact Info Section -->
+                <section class="visit-us-section slide-up">
+                    <div class="visit-grid">
+                        <div class="visit-info-card">
+                            <h2>Visit Our Hospital</h2>
+                            <p>We are conveniently located in Beedshed, Kolhapur. Drop by or contact us using the
+                                details below.</p>
+                            <div class="visit-details-list">
+                                <div class="visit-detail-item">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    <div>
+                                        <h4>Address</h4>
+                                        <p>Shri Swami Samarth Hospital, Beedshed, Tal Karveer, Dist Kolhapur,
+                                            Maharashtra, India</p>
+                                    </div>
+                                </div>
+                                <div class="visit-detail-item">
+                                    <i class="bi bi-telephone-fill"></i>
+                                    <div>
+                                        <h4>Phone</h4>
+                                        <p><a href="tel:9922231315">9922231315</a> / <a
+                                                href="tel:9021751057">9021751057</a></p>
+                                    </div>
+                                </div>
+                                <div class="visit-detail-item">
+                                    <i class="bi bi-envelope-fill"></i>
+                                    <div>
+                                        <h4>Email</h4>
+                                        <p><a href="mailto:drmansingpatil@swamisamarth.com">drmansingpatil@gmail.com</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="visit-detail-item">
+                                    <i class="bi bi-clock-fill"></i>
+                                    <div>
+                                        <h4>Timings</h4>
+                                        <p>Mon - Sat: 8:00 AM - 2:00 PM, 5:00 PM - 9:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="visit-map-card">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d244506.15026670913!2d73.9540952!3d16.7563351!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc0536648b3c07f%3A0xe1ea1d062dd9595f!2z4KS24KWN4KSw4KWAIOCkuOCljeCkteCkvuCkruClgCDgpLjgpK7gpLDgpY3gpKUg4KS54KWJ4KS44KWN4KSq4KS_4KSf4KSy!5e0!3m2!1sen!2sin!4v1782214268878!5m2!1sen!2sin"
+                                width="100%" height="100%" style="border:0; border-radius: var(--radius-md);"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+
+            <!-- 2. DOCTOR ECARD DETAIL VIEW -->
+            <section id="view-ecard" class="content-view">
+                <div class="back-nav-container fade-in">
+                    <button class="back-btn" onclick="app.navigateTo('directory')">
+                        <i class="bi bi-arrow-left"></i> Back to Directory
+                    </button>
+                </div>
+
+                <div class="ecard-wrapper fade-in">
+                    <div class="ecard-card">
+                        <!-- ECard Top Banner / Background -->
+                        <div class="ecard-banner-bg" id="ecard-banner">
+                            <div class="ecard-banner-overlay"></div>
+                        </div>
+
+                        <!-- ECard Profile Photo Container -->
+                        <div class="ecard-profile-sec">
+                            <div class="ecard-photo-holder" id="ecard-photo-container">
+                                <!-- Image or Initial avatar will be loaded dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- ECard Primary Info -->
+                        <div class="ecard-body-content">
+                            <div class="ecard-primary-info">
+                                <h1 id="ecard-name">Dr. Name</h1>
+                                <span class="ecard-badge-specialty" id="ecard-specialty">Specialty</span>
+                                <div class="ecard-hospital-link">
+                                    <i class="bi bi-building"></i> <span id="ecard-hospital-name">Shri Swami Samarth
+                                        Hospital</span>
+                                </div>
+                            </div>
+
+                            <!-- Experience & Ratings Row -->
+                            <div class="ecard-stats-row">
+                                <div class="ecard-stat-col" id="ecard-exp-col">
+                                    <h4 id="ecard-exp-num">15</h4>
+                                    <span id="ecard-exp-label">Years Exp</span>
+                                </div>
+                                <div class="ecard-stat-col divider" id="ecard-rating-divider"></div>
+                                <div class="ecard-stat-col" id="ecard-rating-col">
+                                    <h4 id="ecard-rating-stars">★★★★★</h4>
+                                    <span>Patient Rating</span>
+                                </div>
+                            </div>
+
+                            <!-- Fast Action Buttons (Call / Whatsapp) -->
+                            <div class="ecard-quick-actions">
+                                <a href="#" id="ecard-action-call" class="ecard-btn-action call">
+                                    <i class="bi bi-telephone-fill"></i> Call Doctor
+                                </a>
+                                <a href="#" id="ecard-action-whatsapp" class="ecard-btn-action whatsapp"
+                                    target="_blank">
+                                    <i class="bi bi-whatsapp"></i> WhatsApp
+                                </a>
+                            </div>
+
+                            <!-- Contact Card Save & Share Buttons -->
+                            <div class="ecard-save-share-actions">
+                                <button onclick="app.downloadDoctorVCard()" class="ecard-btn-sub save-contact">
+                                    <i class="bi bi-download"></i> Save Contact
+                                </button>
+                                <button onclick="app.shareDoctorCard()" class="ecard-btn-sub share-card">
+                                    <i class="bi bi-share-fill"></i> Share ECard
+                                </button>
+                            </div>
+
+                            <!-- ECard Detail Sections -->
+                            <div class="ecard-details-sections">
+
+                                <!-- Consultation Hours -->
+                                <div class="details-section" id="ecard-hours-section">
+                                    <h3 class="details-section-title" id="ecard-hours-title">CONSULTATION HOURS</h3>
+                                    <div class="details-row">
+                                        <i class="bi bi-clock-fill"></i>
+                                        <div>
+                                            <p class="semibold" id="ecard-hours-days">Mon - Sat</p>
+                                            <p class="subtext" id="ecard-hours-time">9:00 AM - 1:00 PM, 5:00 PM - 8:00
+                                                PM</p>
+                                        </div>
+                                    </div>
+                                    <button class="book-appointment-btn" id="ecard-booking-btn"
+                                        onclick="app.openBookingModal()">
+                                        <i class="bi bi-calendar-event"></i> Book Appointment
+                                    </button>
+                                </div>
+
+                                <!-- Clinic Address -->
+                                <div class="details-section">
+                                    <h3 class="details-section-title">CLINIC / DEPT LOCATION</h3>
+                                    <div class="details-row">
+                                        <i class="bi bi-hospital"></i>
+                                        <div>
+                                            <p class="semibold" id="ecard-clinic-name">Swami Samarth Hospital</p>
+                                        </div>
+                                    </div>
+                                    <div class="details-row">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        <div>
+                                            <p class="subtext" id="ecard-clinic-address">Shri Swami Samarth Hospital,
+                                                OPD Wing A, Floor 2</p>
+                                        </div>
+                                    </div>
+                                    <a href="#" id="ecard-action-map" class="ecard-btn-map" target="_blank">
+                                        <i class="bi bi-map-fill"></i> Get Directions
+                                    </a>
+                                </div>
+
+                                <!-- Contact Information -->
+                                <div class="details-section">
+                                    <h3 class="details-section-title">CONTACT DETAILS</h3>
+                                    <div class="details-row">
+                                        <i class="bi bi-phone"></i>
+                                        <div>
+                                            <p class="subtext"><a href="#" id="ecard-contact-phone">9922231315</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="details-row">
+                                        <i class="bi bi-envelope"></i>
+                                        <div>
+                                            <p class="subtext"><a href="#"
+                                                    id="ecard-contact-email">drmansingpatil@gmail.com</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Footer inside ECard -->
+                            <footer class="ecard-footer">
+                                <p class="ecard-brand-tag">Digital Doctor Card • Shri Swami Samarth Hospital</p>
+                            </footer>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 3. ADMIN / MANAGEMENT VIEW -->
+            <section id="view-admin" class="content-view">
+                <div class="admin-layout-container fade-in">
+
+                    <!-- Admin Sidebar - Doctor list -->
+                    <div class="admin-sidebar">
+                        <div class="sidebar-header" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                <h3>Management</h3>
+                            </div>
+                            <div style="display: flex; gap: 8px; width: 100%;">
+                                <button class="add-new-btn" onclick="app.createNewDoctorForm()"
+                                    style="flex: 1; justify-content: center;">
+                                    <i class="bi bi-plus-circle-fill"></i> Add Doctor
+                                </button>
+                                <button class="add-new-btn staff-add-btn" onclick="app.createNewStaffForm()"
+                                    style="flex: 1; justify-content: center; background: var(--staff-primary, #6366f1);">
+                                    <i class="bi bi-plus-circle-fill"></i> Add Staff
+                                </button>
+                            </div>
+                        </div>
+                        <div class="admin-search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="text" id="admin-search-input" placeholder="Search name or role..."
+                                oninput="app.adminFilterDoctors()">
+                        </div>
+                        <div id="admin-doctors-list" class="admin-sidebar-list">
+                            <!-- Dynamically loaded admin doctor list items -->
+                        </div>
+                    </div>
+
+                    <!-- Admin Main form -->
+                    <div class="admin-main-panel">
+                        <div class="panel-header">
+                            <div>
+                                <h2 id="admin-form-title">Add / Edit Doctor Details</h2>
+                                <p>All changes are stored in the browser's local storage and will persist on refresh.
+                                </p>
+                            </div>
+                            <button type="button" class="form-btn outline" onclick="app.logoutAdmin()"
+                                style="padding: 8px 16px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </button>
+                        </div>
+
+                        <form id="doctor-form" onsubmit="app.saveDoctorForm(event)">
+                            <input type="hidden" id="form-doctor-id">
+
+                            <div class="form-grid">
+                                <!-- Member Type -->
+                                <div class="form-group">
+                                    <label for="form-type">Member Type <span class="required">*</span></label>
+                                    <select id="form-type" required onchange="app.onFormTypeChange()">
+                                        <option value="doctor">Doctor / Specialist</option>
+                                        <option value="staff">Staff Member</option>
+                                    </select>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="form-group">
+                                    <label for="form-name" id="label-form-name">Doctor Name <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="form-name" required placeholder="e.g. Dr. Jane Smith">
+                                </div>
+
+                                <!-- Specialty -->
+                                <div class="form-group">
+                                    <label for="form-specialty" id="label-form-specialty">Specialty <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="form-specialty" required
+                                        placeholder="e.g. Cardiologist, Pediatrician">
+                                </div>
+
+                                <!-- Department -->
+                                <div class="form-group">
+                                    <label for="form-department">Department <span class="required">*</span></label>
+                                    <select id="form-department" required>
+                                        <option value="General Medicine">General Medicine</option>
+                                        <option value="Ayurveda">Ayurveda</option>
+                                        <option value="Homeopathy">Homeopathy</option>
+                                        <option value="Nursing">Nursing</option>
+                                        <option value="Laboratory">Laboratory</option>
+                                        <option value="Pharmacy">Pharmacy</option>
+                                        <option value="Front Desk">Front Desk</option>
+                                        <option value="Administration">Administration</option>
+                                    </select>
+                                </div>
+
+                                <!-- Profile Image URL -->
+                                <div class="form-group">
+                                    <label for="form-image-url">Profile Photo URL</label>
+                                    <input type="url" id="form-image-url" placeholder="Leave empty for avatar icon">
+                                    <span class="help-text">You can paste any online image address.</span>
+                                </div>
+
+                                <!-- Experience Years & Months -->
+                                <div class="form-group">
+                                    <label for="form-experience-years">Experience <span
+                                            class="required">*</span></label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <div style="flex: 1;">
+                                            <input type="number" id="form-experience-years" min="0" required
+                                                placeholder="Years (e.g. 12)" style="width: 100%;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <input type="number" id="form-experience-months" min="0" max="11"
+                                                placeholder="Months (e.g. 6)" style="width: 100%;">
+                                        </div>
+                                    </div>
+                                    <span class="help-text">Experience auto-updates as months/years pass.</span>
+                                </div>
+
+                                <!-- Rating Stars -->
+                                <div class="form-group" id="group-form-rating">
+                                    <label for="form-rating">Rating (1 to 5 Stars) <span
+                                            class="required">*</span></label>
+                                    <select id="form-rating" required>
+                                        <option value="5">★★★★★ (5 Stars)</option>
+                                        <option value="4">★★★★☆ (4 Stars)</option>
+                                        <option value="3">★★★☆☆ (3 Stars)</option>
+                                        <option value="2">★★☆☆☆ (2 Stars)</option>
+                                        <option value="1">★☆☆☆☆ (1 Star)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="form-group">
+                                    <label for="form-phone">Phone Number <span class="required">*</span></label>
+                                    <input type="tel" id="form-phone" required placeholder="e.g. 9922231315">
+                                </div>
+
+                                <!-- WhatsApp -->
+                                <div class="form-group">
+                                    <label for="form-whatsapp">WhatsApp Number</label>
+                                    <input type="tel" id="form-whatsapp"
+                                        placeholder="e.g. 9922231315 (Defaults to phone)">
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label for="form-email">Email Address <span class="required">*</span></label>
+                                    <input type="email" id="form-email" required
+                                        placeholder="e.g. doctor@swamisamarth.com">
+                                </div>
+
+                                <!-- Map URL -->
+                                <div class="form-group" id="group-form-map-url">
+                                    <label for="form-map-url">Google Maps Location Link</label>
+                                    <input type="url" id="form-map-url" placeholder="https://maps.google.com/?q=...">
+                                </div>
+
+                                <!-- Clinic Name -->
+                                <div class="form-group full-width">
+                                    <label for="form-clinic-name">Clinic/Hospital Wing Name <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="form-clinic-name" required
+                                        placeholder="e.g. Shri Swami Samarth Hospital, OPD Block A">
+                                </div>
+
+                                <!-- Address -->
+                                <div class="form-group full-width">
+                                    <label for="form-address">Clinic Address <span class="required">*</span></label>
+                                    <textarea id="form-address" rows="2" required
+                                        placeholder="Full physical address..."></textarea>
+                                </div>
+
+                                <!-- Consult Hours Days -->
+                                <div class="form-group">
+                                    <label for="form-hours-days" id="label-form-hours-days">Consultation Days <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="form-hours-days" required
+                                        placeholder="e.g. Mon - Sat, Mon/Wed/Fri">
+                                </div>
+
+                                <!-- Consult Hours Time -->
+                                <div class="form-group">
+                                    <label for="form-hours-time" id="label-form-hours-time">Consultation Time Slot <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="form-hours-time" required
+                                        placeholder="e.g. 9:00 AM - 1:00 PM, 5:00 PM - 8:00 PM">
+                                </div>
+                            </div>
+
+                            <div class="form-buttons-row">
+                                <button type="button" class="form-btn danger-outline" id="btn-delete-doctor"
+                                    onclick="app.deleteDoctor()">
+                                    <i class="bi bi-trash3-fill"></i> Delete Doctor
+                                </button>
+                                <button type="button" class="form-btn outline" onclick="app.resetDoctorForm()">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="form-btn primary">
+                                    <i class="bi bi-check-circle-fill"></i> Save ECard Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer of SPA -->
+        <footer class="premium-footer">
+            <div class="footer-grid">
+                <div class="footer-col-about">
+                    <div class="footer-logo">
+                        <i class="bi bi-heart-pulse-fill"></i>
+                        <span>Shri Swami Samarth Hospital</span>
+                    </div>
+                    <p class="footer-about-text">Providing compassionate, state-of-the-art healthcare since 2009.
+                        Combining traditional Ayurveda, Homeopathy, and modern General Medicine.</p>
+                </div>
+                <div class="footer-col-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#" onclick="app.navigateTo('directory')">Home </a></li>
+                        <li><a href="#" onclick="app.scrollToSection('sec-doctors-directory')">Our Specialists</a></li>
+                        <li><a href="#" onclick="app.scrollToSection('sec-home-appointment')">Appointments</a></li>
+                        <li><a href="#" onclick="app.scrollToSection('sec-home-appointment')">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col-contact">
+                    <h4>Emergency Help</h4>
+                    <p class="footer-emergency-tel"><i class="bi bi-telephone-fill"></i> <a
+                            href="tel:9922231315">9922231315</a></p>
+                    <p class="footer-emergency-tel"><i class="bi bi-whatsapp"></i> <a href="https://wa.me/9922231315"
+                            target="_blank">WhatsApp Inquiry</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Shri Swami Samarth Hospital. Built with &hearts; for patient care. • HTML5 • Custom CSS
+                    Grid • LocalStorage DB</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- MODAL 1: SHARE POPUP -->
+    <div class="modal-backdrop" id="modal-share" onclick="app.closeModal('modal-share')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Share Digital ECard</h3>
+                <button class="modal-close" onclick="app.closeModal('modal-share')"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="modal-desc" id="share-modal-title">Scan the QR code below to open this card on your mobile
+                    phone or share the link.</p>
+
+                <div class="qr-container">
+                    <div id="qr-placeholder">
+                        <!-- Loading or QR code will be generated here -->
+                        <img id="modal-qr-image" src="" alt="ECard QR Code">
+                    </div>
+                </div>
+
+                <div class="share-links-container">
+                    <div class="share-url-box">
+                        <input type="text" id="share-url-input" readonly>
+                        <button onclick="app.copyShareUrl()" id="btn-copy-url">
+                            <i class="bi bi-copy"></i> Copy Link
+                        </button>
+                    </div>
+                    <div class="share-social-grid">
+                        <a href="#" id="share-social-whatsapp" class="social-share-btn wa" target="_blank">
+                            <i class="bi bi-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="#" id="share-social-email" class="social-share-btn email">
+                            <i class="bi bi-envelope-fill"></i> Email
+                        </a>
+                        <button onclick="app.downloadQR()" class="social-share-btn dl">
+                            <i class="bi bi-download"></i> Download QR
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL 2: BOOKING FORM -->
+    <div class="modal-backdrop" id="modal-booking" onclick="app.closeModal('modal-booking')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Book Clinic Appointment</h3>
+                <button class="modal-close" onclick="app.closeModal('modal-booking')"><i
+                        class="bi bi-x-lg"></i></button>
+            </div>
+            <form id="booking-form" onsubmit="app.confirmBooking(event)">
+                <div class="modal-body">
+                    <div class="booking-doctor-info">
+                        <div class="small-avatar" id="booking-doc-avatar"></div>
+                        <div>
+                            <h4 id="booking-doc-name">Dr. Jane Smith</h4>
+                            <p id="booking-doc-specialty" class="subtext">Cardiologist</p>
+                        </div>
+                    </div>
+
+                    <div class="booking-inputs">
+                        <div class="form-group">
+                            <label for="book-patient-name">Patient's Full Name <span class="required">*</span></label>
+                            <input type="text" id="book-patient-name" required placeholder="e.g. John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="book-patient-phone">Contact Number <span class="required">*</span></label>
+                            <input type="tel" id="book-patient-phone" required placeholder="e.g. 9876543210">
+                        </div>
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="book-date">Appointment Date <span class="required">*</span></label>
+                                <input type="date" id="book-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="book-time">Preferred Time Slot <span class="required">*</span></label>
+                                <select id="book-time" required>
+                                    <option value="09:30 AM">09:30 AM - Morning Slot</option>
+                                    <option value="11:00 AM">11:00 AM - Morning Slot</option>
+                                    <option value="12:15 PM">12:15 PM - Morning Slot</option>
+                                    <option value="05:30 PM">05:30 PM - Evening Slot</option>
+                                    <option value="06:45 PM">06:45 PM - Evening Slot</option>
+                                    <option value="07:30 PM">07:30 PM - Evening Slot</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="book-symptoms">Brief Symptoms / Notes</label>
+                            <textarea id="book-symptoms" rows="2"
+                                placeholder="Describe symptoms or reasons for visit..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="form-btn outline"
+                        onclick="app.closeModal('modal-booking')">Cancel</button>
+                    <button type="submit" class="form-btn primary">Request Booking</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL 3: BOOKING RECEIPT -->
+    <div class="modal-backdrop" id="modal-receipt" onclick="app.closeModal('modal-receipt')">
+        <div class="modal-card receipt" onclick="event.stopPropagation()">
+            <div class="receipt-success-badge">
+                <i class="bi bi-check-lg"></i>
+            </div>
+            <div class="modal-header text-center">
+                <h3>Appointment Requested!</h3>
+                <p class="modal-desc">Please present this receipt at the reception desk on your arrival.</p>
+            </div>
+            <div class="modal-body">
+                <div class="receipt-slip">
+                    <div class="receipt-row header-row">
+                        <span class="hospital-brand">SHRI SWAMI SAMARTH CLINIC SLIP</span>
+                        <span class="receipt-id" id="receipt-number">#SJ-89234</span>
+                    </div>
+                    <div class="receipt-divider"></div>
+                    <div class="receipt-row">
+                        <span class="label">Patient Name:</span>
+                        <span class="value" id="receipt-patient-name">John Doe</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="label">Doctor Name:</span>
+                        <span class="value" id="receipt-doctor-name">Dr. Jane Smith</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="label">Department:</span>
+                        <span class="value" id="receipt-doctor-dept">Cardiology</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="label">Appointment:</span>
+                        <span class="value date-value" id="receipt-datetime">June 25, 2026 @ 11:00 AM</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="label">Status:</span>
+                        <span class="value status-badge">CONFIRMED (PENDING ARRIVAL)</span>
+                    </div>
+                    <div class="receipt-divider"></div>
+                    <p class="receipt-note">Note: A confirmation SMS has been sent to <span
+                            id="receipt-patient-phone">9876543210</span>. Please arrive 15 minutes before your scheduled
+                        slot.</p>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button onclick="app.closeModal('modal-receipt')" class="form-btn primary w-full">Got it, Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: ADMIN LOGIN -->
+    <div class="modal-backdrop" id="modal-admin-login" onclick="app.closeModal('modal-admin-login')">
+        <div class="modal-card" onclick="event.stopPropagation()" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3>Admin Authentication</h3>
+                <button class="modal-close" onclick="app.closeModal('modal-admin-login')"><i
+                        class="bi bi-x-lg"></i></button>
+            </div>
+            <form id="admin-login-form" onsubmit="app.authenticateAdmin(event)">
+                <div class="modal-body">
+                    <p class="modal-desc">Please enter the administrator password to access the management portal.</p>
+                    <div class="form-group" style="margin-top: 15px; text-align: left;">
+                        <label for="admin-password">Password</label>
+                        <input type="password" id="admin-password" required placeholder="Enter password..."
+                            style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background: var(--bg-app); color: var(--text-primary); margin-top: 6px;">
+                        <p id="admin-login-error"
+                            style="color: #ef4444; font-size: 13px; margin-top: 8px; display: none;"><i
+                                class="bi bi-exclamation-circle-fill"></i> Incorrect password. Please try again.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="form-btn outline"
+                        onclick="app.closeModal('modal-admin-login')">Cancel</button>
+                    <button type="submit" class="form-btn primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating Widgets -->
+    <a href="https://wa.me/9922231315" class="floating-wa-btn" target="_blank" title="Chat on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <a href="tel:9922231315" class="floating-emergency-btn" title="Call Emergency Helpline">
+        <i class="bi bi-telephone-fill"></i> <span>🚑 Emergency</span>
+    </a>
+
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <!-- AWS SNS Notification Container -->
+    <div id="sns-toast-container" class="sns-toast-container"></div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="app.js"></script>
+</body>
+
+</html>
