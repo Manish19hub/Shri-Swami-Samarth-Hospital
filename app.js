@@ -45,38 +45,20 @@ const SEED_DOCTORS = [
 
 const SEED_STAFF = [
     {
-        id: "staff-swati-patil",
-        name: "Swati Patil",
-        specialty: "Senior Staff Nurse",
-        department: "Nursing",
-        experience: 8,
+        id: "staff-sanika-mangore",
+        name: "Sanika Mangore",
+        specialty: "Front Desk Nurse",
+        department: "Front Desk",
+        experience: 1,
         rating: 5,
-        phone: "9922231315",
-        whatsapp: "9922231315",
-        email: "swati.patil@swamisamarth.com",
+        phone: "7066262501",
+        whatsapp: "7066262501",
+        email: "sanika.mangore@gmail.com",
         clinicName: "Swami Samarth Hospital Beedshed",
         address: "Swami samarth hospital beedshed tal karveer dist kolhapur, Maharashtra, India",
         mapUrl: "https://maps.app.goo.gl/pcNMqtHSPwEamLoA8",
         hoursDays: "Mon - Sat",
-        hoursTime: "8:00 AM - 4:00 PM",
-        imageUrl: "",
-        type: "staff"
-    },
-    {
-        id: "staff-ranjit-salunkhe",
-        name: "Ranjit Salunkhe",
-        specialty: "Lab Technician",
-        department: "Laboratory",
-        experience: 6,
-        rating: 5,
-        phone: "9922231315",
-        whatsapp: "9922231315",
-        email: "ranjit.salunkhe@swamisamarth.com",
-        clinicName: "Swami Samarth Hospital Beedshed",
-        address: "Swami samarth hospital beedshed tal karveer dist kolhapur, Maharashtra, India",
-        mapUrl: "https://maps.app.goo.gl/pcNMqtHSPwEamLoA8",
-        hoursDays: "Mon - Sat",
-        hoursTime: "9:00 AM - 6:00 PM",
+        hoursTime: "9:00 AM - 5:30 PM",
         imageUrl: "",
         type: "staff"
     }
@@ -140,14 +122,14 @@ class HospitalECardApp {
         const parts = startDateStr.split("-");
         const startYear = parseInt(parts[0]);
         const startMonth = parseInt(parts[1]) - 1; // 0-indexed
-        
+
         const now = new Date();
         const currentYear = now.getFullYear();
         const currentMonth = now.getMonth();
-        
+
         let diffMonths = (currentYear - startYear) * 12 + (currentMonth - startMonth);
         if (diffMonths < 0) diffMonths = 0;
-        
+
         const years = Math.floor(diffMonths / 12);
         const months = diffMonths % 12;
         return { years, months };
@@ -167,27 +149,37 @@ class HospitalECardApp {
             try {
                 this.doctors = JSON.parse(localData);
                 let migrated = false;
-                
+
+                // Migrate staff members: remove Swati Patil and Ranjit Salunkhe
+                const hasOldStaff = this.doctors.some(d => d.id === "staff-swati-patil" || d.id === "staff-ranjit-salunkhe");
+                if (hasOldStaff) {
+                    this.doctors = this.doctors.filter(d => d.id !== "staff-swati-patil" && d.id !== "staff-ranjit-salunkhe");
+                    if (!this.doctors.some(d => d.id === "staff-sanika-mangore")) {
+                        this.doctors.push(...SEED_STAFF);
+                    }
+                    migrated = true;
+                }
+
                 // Ensure all existing doctors have type: 'doctor' and calculate experience
                 this.doctors.forEach(d => {
                     if (!d.type) {
                         d.type = 'doctor';
                         migrated = true;
                     }
-                    
+
                     if (!d.experienceStartDate) {
                         // Create one based on existing static experience
                         const years = parseInt(d.experience) || 0;
                         d.experienceStartDate = this.getStartDateFromExperience(years, 0);
                         migrated = true;
                     }
-                    
+
                     // Migrate map URLs to the new one
                     if (d.mapUrl === "https://maps.app.goo.gl/RzKnaszod3cJwGCo7" || d.mapUrl === "https://maps.app.goo.gl/ERseMFW4hGXfVzGt7") {
                         d.mapUrl = "https://maps.app.goo.gl/pcNMqtHSPwEamLoA8";
                         migrated = true;
                     }
-                    
+
                     // Recalculate experience based on experienceStartDate
                     const exp = this.getExperienceFromStartDate(d.experienceStartDate);
                     const expVal = this.getExperienceValue(exp.years, exp.months);
@@ -201,6 +193,11 @@ class HospitalECardApp {
                 const hasStaff = this.doctors.some(d => d.type === 'staff');
                 if (!hasStaff) {
                     this.doctors.push(...SEED_STAFF);
+                    this.doctors.forEach(d => {
+                        if (!d.experienceStartDate) {
+                            d.experienceStartDate = this.getStartDateFromExperience(d.experience, 0);
+                        }
+                    });
                     migrated = true;
                 }
 
@@ -515,7 +512,7 @@ class HospitalECardApp {
 
         const isStaff = doc.type === 'staff';
         const ecardView = document.getElementById("view-ecard");
-        
+
         // Toggle staff theme styling
         if (isStaff) {
             ecardView.classList.add("staff-theme");
@@ -553,7 +550,7 @@ class HospitalECardApp {
 
         // Whatsapp link
         const waNum = doc.whatsapp || doc.phone;
-        const textMessage = isStaff 
+        const textMessage = isStaff
             ? encodeURIComponent(`Hello ${doc.name}, I would like to contact you regarding your duties/services at the hospital.`)
             : encodeURIComponent(`Hello ${doc.name}, I would like to inquire about your consultation.`);
         document.getElementById("ecard-action-whatsapp").href = `https://wa.me/${waNum}?text=${textMessage}`;
@@ -903,7 +900,7 @@ class HospitalECardApp {
         document.getElementById("form-specialty").value = doc.specialty;
         document.getElementById("form-department").value = doc.department;
         document.getElementById("form-image-url").value = doc.imageUrl || "";
-        
+
         const exp = this.getExperienceFromStartDate(doc.experienceStartDate);
         document.getElementById("form-experience-years").value = exp.years;
         document.getElementById("form-experience-months").value = exp.months;
@@ -950,8 +947,8 @@ class HospitalECardApp {
         document.getElementById("form-type").value = type;
         this.onFormTypeChange();
 
-        document.getElementById("admin-form-title").innerText = type === 'doctor' 
-            ? "Add New Medical Specialist" 
+        document.getElementById("admin-form-title").innerText = type === 'doctor'
+            ? "Add New Medical Specialist"
             : "Add New Staff Member";
 
         // Hide delete button for unsaved new entries
@@ -974,7 +971,7 @@ class HospitalECardApp {
 
         if (type === 'staff') {
             if (labelName) labelName.innerHTML = 'Staff Name <span class="required">*</span>';
-            if (inputName) inputName.placeholder = 'e.g. Swati Patil';
+            if (inputName) inputName.placeholder = 'e.g. Sanika Mangore';
             if (labelSpecialty) labelSpecialty.innerHTML = 'Role / Job Title <span class="required">*</span>';
             if (inputSpecialty) inputSpecialty.placeholder = 'e.g. Senior Staff Nurse, Receptionist';
             if (groupRating) groupRating.style.display = 'none';
@@ -1006,12 +1003,12 @@ class HospitalECardApp {
         const specialty = document.getElementById("form-specialty").value;
         const department = document.getElementById("form-department").value;
         const imageUrl = document.getElementById("form-image-url").value;
-        
+
         const expYears = parseInt(document.getElementById("form-experience-years").value) || 0;
         const expMonths = parseInt(document.getElementById("form-experience-months").value) || 0;
         const experienceStartDate = this.getStartDateFromExperience(expYears, expMonths);
         const experience = this.getExperienceValue(expYears, expMonths);
-        
+
         const rating = parseInt(document.getElementById("form-rating").value) || 5;
         const phone = document.getElementById("form-phone").value;
         const whatsapp = document.getElementById("form-whatsapp").value || phone;
@@ -1166,7 +1163,7 @@ class HospitalECardApp {
 
     confirmHomepageBooking(event) {
         event.preventDefault();
-        
+
         const docId = document.getElementById("home-book-doctor").value;
         const doc = this.doctors.find(d => d.id === docId);
         if (!doc) {
@@ -1199,7 +1196,7 @@ class HospitalECardApp {
 
         // Reset Homepage Booking Form
         document.getElementById("home-booking-form").reset();
-        
+
         // Re-set default date after reset
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -1231,20 +1228,20 @@ class HospitalECardApp {
     sendSNSNotification(doctor, patientName, patientPhone, date, timeSlot, receiptId) {
         // Generate unique SNS Message ID
         const messageId = 'sns-msg-' + Math.floor(10000000 + Math.random() * 90000000);
-        
+
         // Ensure email exists or fallback
         const emailAddress = doctor.email || `dr.${doctor.name.toLowerCase().replace(/[^a-z0-9]/g, '')}@swamisamarth.com`;
-        
+
         // Format AWS SNS Publish Payload
         const snsPayload = {
             TopicArn: "arn:aws:sns:us-east-1:123456789012:HospitalAppointments",
             Message: `Dear Dr. ${doctor.name},\n\nA new clinic appointment has been scheduled.\n\n` +
-                     `Patient Name: ${patientName}\n` +
-                     `Contact: ${patientPhone}\n` +
-                     `Date: ${date}\n` +
-                     `Time Slot: ${timeSlot}\n` +
-                     `Receipt Reference: #${receiptId}\n\n` +
-                     `This message has been dispatched via AWS SNS to your registered email: ${emailAddress}.`,
+                `Patient Name: ${patientName}\n` +
+                `Contact: ${patientPhone}\n` +
+                `Date: ${date}\n` +
+                `Time Slot: ${timeSlot}\n` +
+                `Receipt Reference: #${receiptId}\n\n` +
+                `This message has been dispatched via AWS SNS to your registered email: ${emailAddress}.`,
             Subject: `New Appointment: ${patientName} - #${receiptId}`,
             MessageAttributes: {
                 "email": {
@@ -1305,10 +1302,10 @@ Date/Time: ${date} @ ${timeSlot}</div>
     sendRealEmailNotification(doctor, patientName, patientPhone, patientEmail, date, timeSlot, receiptId) {
         // Fallback to primary hospital email if doctor does not have one
         const doctorEmail = doctor.email || 'drmansingpatil@gmail.com';
-        
+
         // FormSubmit AJAX submission endpoint
         const formSubmitUrl = `https://formsubmit.co/ajax/${doctorEmail}`;
-        
+
         // Construct the body payload
         const emailBody = {
             "Patient Name": patientName,
@@ -1321,16 +1318,16 @@ Date/Time: ${date} @ ${timeSlot}</div>
             "_replyto": patientEmail,
             "_honey": "", // honeypot spam protection
             "_autoresponse": `Dear ${patientName},\n\n` +
-                             `This is a confirmation of your appointment request at Shri Swami Samarth Hospital.\n\n` +
-                             `Appointment Details:\n` +
-                             `- Specialist: ${doctor.name} (${doctor.specialty})\n` +
-                             `- Date: ${date}\n` +
-                             `- Time Slot: ${timeSlot}\n` +
-                             `- Receipt Reference: #${receiptId}\n\n` +
-                             `If you need to reschedule or cancel, please contact the clinic.\n\n` +
-                             `Best regards,\n` +
-                             `Shri Swami Samarth Hospital Team\n` +
-                             `Tel: 9922231315 / 9021751057`
+                `This is a confirmation of your appointment request at Shri Swami Samarth Hospital.\n\n` +
+                `Appointment Details:\n` +
+                `- Specialist: ${doctor.name} (${doctor.specialty})\n` +
+                `- Date: ${date}\n` +
+                `- Time Slot: ${timeSlot}\n` +
+                `- Receipt Reference: #${receiptId}\n\n` +
+                `If you need to reschedule or cancel, please contact the clinic.\n\n` +
+                `Best regards,\n` +
+                `Shri Swami Samarth Hospital Team\n` +
+                `Tel: 9922231315 / 9021751057`
         };
 
         console.log(`Sending real email request via FormSubmit to doctor's email: ${doctorEmail}...`);
@@ -1343,25 +1340,25 @@ Date/Time: ${date} @ ${timeSlot}</div>
             },
             body: JSON.stringify(emailBody)
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log("FormSubmit email sent successfully:", data);
-        })
-        .catch(err => {
-            console.error("FormSubmit email submission error:", err);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log("FormSubmit email sent successfully:", data);
+            })
+            .catch(err => {
+                console.error("FormSubmit email submission error:", err);
+            });
     }
 
     setTestimonial(index) {
         this.testimonialIndex = index;
         const slides = document.querySelectorAll(".testimonial-slide");
         const dots = document.querySelectorAll(".carousel-dot");
-        
+
         slides.forEach((slide, i) => {
             if (i === index) slide.classList.add("active");
             else slide.classList.remove("active");
         });
-        
+
         dots.forEach((dot, i) => {
             if (i === index) dot.classList.add("active");
             else dot.classList.remove("active");
@@ -1404,7 +1401,7 @@ Date/Time: ${date} @ ${timeSlot}</div>
         if (!hoursDays) return true;
         const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         const todayDayName = days[new Date().getDay()]; // e.g. "Mon"
-        
+
         const lowerDays = hoursDays.toLowerCase();
         // Standard range check for "Mon - Sat"
         if (lowerDays.includes("mon - sat")) {
